@@ -22,16 +22,18 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-primary text-white p-4 flex justify-between items-center">
+    <nav className="bg-primary text-black p-4 flex justify-between items-center">
       <div className="text-xl font-bold">Navbar</div>
       <ul className="flex space-x-4">
-        <li>
+        <li className="flex space-x-4 font-semibold [&>.active]:opacity-50">
+          <NavLink to="/">Home</NavLink>
           <NavLink to="/task-manager">Tasks</NavLink>
+          <NavLink to="/about">About</NavLink>
         </li>
       </ul>
       <button
         onClick={toggleDarkMode}
-        className="p-2 rounded-full bg-white text-primary focus:outline-none"
+        className="p-2 rounded-full bg-black text-primary focus:outline-none"
       >
         {darkMode ? <FaSun /> : <FaMoon />}
       </button>
