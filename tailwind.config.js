@@ -16,7 +16,7 @@ module.exports = {
           "heading-secondary": "#F1F5F9",
           "text-primary": "#F1F5F9",
           "text-secondary": "#999999",
-          "border-primary": "#4D4D4D",
+          "border-primary": "#303030",
           "border-secondary": "#4D4D4D",
         },
         light: {

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { BiCopy, BiEdit, BiPlus, BiTrash, BiSave } from "react-icons/bi";
+import {
+  BiCopy,
+  BiEdit,
+  BiPlus,
+  BiTrash,
+  BiSave,
+  BiCheckbox,
+  BiCheckboxChecked,
+} from "react-icons/bi";
 import { constants } from "../../utils/constants";
 import { AiFillSave } from "react-icons/ai";
 import moment from "moment";
@@ -8,6 +16,10 @@ const TaskManager = () => {
   const [isTaskAdd, setIsTaskAdd] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [textareaValue, setTextareaValue] = useState("");
+
+  const classes = {
+    btn: "w-[50px] h-[50px] flex bg-secondary font-semibold justify-center items-center rounded-full gap-2 ml-auto hover:opacity-50 active:scale-110 duration-100 disabled:hidden",
+  };
 
   useEffect(() => {
     const getTask = JSON.parse(localStorage.getItem(constants.TASKS_KEY));
@@ -51,6 +63,26 @@ const TaskManager = () => {
     setTasks([]);
   };
 
+  const onCheckAll = () => {
+    setTasks((prev) =>
+      prev.map((task) => ({
+        ...task,
+        done: true,
+        updatedAt: moment().format(),
+      }))
+    );
+  };
+
+  const onUncheckAll = () => {
+    setTasks((prev) =>
+      prev.map((task) => ({
+        ...task,
+        done: false,
+        updatedAt: moment().format(),
+      }))
+    );
+  };
+
   const onDone = (id) => {
     setTasks((prev) =>
       prev.map((task) =>
@@ -84,34 +116,52 @@ const TaskManager = () => {
           <h1>Task Manager</h1>
           <div className="flex w-max ml-auto gap-4 relative z-50">
             <button
+              className={classes?.btn}
+              disabled={isTaskAdd}
+              onClick={onCheckAll}
+            >
+              <BiCheckboxChecked className="text-2xl" />
+            </button>
+
+            <button
+              className={classes?.btn}
+              disabled={isTaskAdd}
+              onClick={onUncheckAll}
+            >
+              <BiCheckbox className="text-2xl" />
+            </button>
+
+            <button
+              className={classes?.btn}
+              disabled={isTaskAdd}
               onClick={onCopyText}
-              className="flex bg-secondary font-semibold px-6 py-2 items-center rounded-2xl gap-2 ml-auto"
             >
               <BiCopy className="text-2xl" />
             </button>
             <button
+              className={classes?.btn}
+              disabled={isTaskAdd}
               onClick={onDeleteSaved}
-              className="flex bg-secondary font-semibold px-6 py-2 items-center rounded-2xl gap-2 ml-auto"
             >
               <BiTrash className="text-2xl" />
             </button>
             <button
+              className={classes?.btn}
+              disabled={isTaskAdd}
               onClick={onSave}
-              className="flex bg-secondary font-semibold px-6 py-2 items-center rounded-2xl gap-2 ml-auto"
             >
-              <AiFillSave className="text-2xl" />
+              <BiSave className="text-2xl" />
             </button>
-            <button
-              onClick={toggleTaskAdd}
-              className="flex bg-secondary font-semibold px-6 py-2 items-center rounded-2xl gap-2 ml-auto"
-            >
+            <button className={classes?.btn} onClick={toggleTaskAdd}>
               {tasks?.length > 0 ? (
                 <span>
                   <BiEdit className="text-2xl" />
                 </span>
               ) : (
                 <BiPlus
-                  className={`duration-200 ${isTaskAdd ? "rotate-45" : ""}`}
+                  className={`duration-200 text-2xl ${
+                    isTaskAdd ? "rotate-45" : ""
+                  }`}
                 />
               )}
             </button>
@@ -125,7 +175,7 @@ const TaskManager = () => {
                   <textarea
                     value={textareaValue}
                     onChange={onTextareaChange}
-                    className="hide-scrollbar bg-gray-200 dark:bg-dark-background-secondary p-4 w-full max-w-[600px] min-h-[300px] rounded-2xl"
+                    className="hide-scrollbar resize-none bg-gray-100 border border-primary dark:bg-dark-background-primary p-4 w-full max-w-[600px] min-h-[300px] rounded-2xl"
                   ></textarea>
                   <button
                     onClick={onSaveTextarea}
@@ -156,6 +206,7 @@ const TaskManager = () => {
                           checked={task?.done}
                           onChange={() => onDone(task?.id)}
                           type="checkbox"
+                          className="scale-150"
                         />
                       </span>
                     </div>
