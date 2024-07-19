@@ -143,11 +143,11 @@ const TaskManager = () => {
                   className="flex justify-between border-t first:border-none py-4 border-primary"
                   key={task?.id + index + 1}
                 >
-                  <span className="font-medium">
+                  <span className="font-semibold">
                     {task?.done ? <del>{task?.task}</del> : task?.task}
                   </span>
                   <div className="flex items-center gap-4">
-                    <span className="text-xs dark:text-dark-text-secondary">
+                    <span className="text-xs text-gray-500 dark:text-dark-text-secondary">
                       {moment(task?.updatedAt).format(constants.DATE_FORMAT)}
                     </span>
                     <span>
