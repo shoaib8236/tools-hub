@@ -98,8 +98,12 @@ const TaskManager = () => {
   };
 
   const onCopyText = () => {
-    const copyText = tasks
-      .map((task) => `${task.task} ${task.done ? "✅" : ""}`)
+    const sortedTasksByText = [...tasks].sort((a, b) => {
+      return a.task.localeCompare(b.task);
+    });
+
+    const copyText = sortedTasksByText
+      .map((task) => `${task.task} ${task.done ? "(Done)" : ""}`)
       .join("\n");
 
     navigator.clipboard.writeText(copyText);
