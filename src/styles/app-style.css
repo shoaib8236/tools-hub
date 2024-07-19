@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any additional custom CSS here */
+
+@layer base {
+  body {
+    @apply dark:bg-dark-background-primary overflow-hidden;
+  }
+  body,
+  * {
+    @apply dark:text-dark-text-primary outline-none;
+  }
+  * {
+    @apply sm:text-sm md:text-base;
+  }
+
+  h1 {
+    @apply sm:text-xl md:text-2xl lg:text-3xl;
+  }
+
+  h2 {
+    @apply sm:text-lg md:text-xl lg:text-2xl;
+  }
+
+  h3 {
+    @apply sm:text-base md:text-lg lg:text-xl;
+  }
+
+  .bg-primary {
+    @apply dark:bg-dark-background-secondary;
+  }
+  .bg-secondary {
+    @apply dark:bg-dark-background-secondary;
+  }
+
+  .bg-white {
+    @apply dark:bg-dark-background-secondary;
+  }
+
+  .border-primary {
+    @apply dark:border-dark-border-primary;
+  }
+
+  .content-wrap-sm {
+    @apply w-full max-w-3xl mx-auto px-4 sm:px-6;
+  }
+
+  .content-wrap-md {
+    @apply w-full max-w-4xl mx-auto px-4 sm:px-6;
+  }
+
+  .content-wrap {
+    @apply w-full max-w-6xl mx-auto px-4 sm:px-6;
+  }
+
+  .py-screen {
+    @apply py-12;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
