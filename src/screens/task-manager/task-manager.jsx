@@ -1,16 +1,15 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import {
+  BiCheckbox,
+  BiCheckboxChecked,
   BiCopy,
   BiEdit,
   BiPlus,
-  BiTrash,
   BiSave,
-  BiCheckbox,
-  BiCheckboxChecked,
+  BiTrash,
 } from "react-icons/bi";
 import { constants } from "../../utils/constants";
-import { AiFillSave } from "react-icons/ai";
-import moment from "moment";
 
 const TaskManager = () => {
   const [isTaskAdd, setIsTaskAdd] = useState(false);
