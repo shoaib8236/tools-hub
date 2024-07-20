@@ -2,6 +2,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { BiSave } from "react-icons/bi";
 import {
+  MdArrowRight,
   MdCheckBox,
   MdCheckBoxOutlineBlank,
   MdClose,
@@ -221,27 +222,35 @@ const TaskManager = () => {
               <div>
                 {tasks.map((task, index) => (
                   <div
-                    className="flex justify-between border-t first:border-none py-4 border-light-gray"
+                    className="flex max-sm:flex-col justify-between border-t first:border-none py-4 border-light-gray"
                     key={task?.id + index + 1}
                   >
                     <span className="font-semibold">
                       {task?.done ? <del>{task?.task}</del> : task?.task}
                     </span>
                     <div className="flex items-center gap-4">
-                      <span className="text-xs text-gray-500 dark:text-dark-text-secondary">
-                        {moment(task?.updatedAt).format(
-                          constants.DATE_TIME_FORMAT
-                        )}
-                      </span>
-                      <span>
-                        <input
-                          value={task?.done}
-                          checked={task?.done}
-                          onChange={() => onDone(task?.id)}
-                          type="checkbox"
-                          className="scale-150"
-                        />
-                      </span>
+                      <div className="flex items-center gap-4 flex-wrap max-sm:flex-col">
+                        <span className="text-xs text-gray-500 dark:text-dark-text-secondary">
+                          Created{" "}
+                          {moment(task?.createdAt).format(
+                            constants.DATE_TIME_FORMAT
+                          )}
+                        </span>{" "}
+                        <span className="text-xs text-gray-500 dark:text-dark-text-secondary">
+                          Updated{" "}
+                          {moment(task?.updatedAt).format(
+                            constants.DATE_TIME_FORMAT
+                          )}
+                        </span>
+                      </div>
+
+                      <input
+                        value={task?.done}
+                        checked={task?.done}
+                        onChange={() => onDone(task?.id)}
+                        type="checkbox"
+                        className="scale-150 max-sm:ml-auto"
+                      />
                     </div>
                   </div>
                 ))}
