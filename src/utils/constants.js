@@ -6,4 +6,5 @@ export const constants = {
   // dates
 
   DATE_FORMAT: "DD MMMM YYYY",
+  DATE_TIME_FORMAT: "DD MMMM YYYY, hh:mm A",
 };

@@ -229,7 +229,9 @@ const TaskManager = () => {
                     </span>
                     <div className="flex items-center gap-4">
                       <span className="text-xs text-gray-500 dark:text-dark-text-secondary">
-                        {moment(task?.updatedAt).format(constants.DATE_FORMAT)}
+                        {moment(task?.updatedAt).format(
+                          constants.DATE_TIME_FORMAT
+                        )}
                       </span>
                       <span>
                         <input
