@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { FaMoon, FaSun } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 

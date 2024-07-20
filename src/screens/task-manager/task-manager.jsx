@@ -9,7 +9,6 @@ import {
   MdDone,
   MdEditNote,
   MdOutlineDeleteForever,
-  MdPending,
   MdPlaylistAdd,
   MdStore,
 } from "react-icons/md";
