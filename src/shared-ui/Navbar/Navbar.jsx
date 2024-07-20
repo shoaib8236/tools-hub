@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -33,9 +34,21 @@ const Navbar = () => {
       </ul>
       <button
         onClick={toggleDarkMode}
-        className="p-2 rounded-full bg-black text-primary focus:outline-none"
+        className="h-[50px] w-[50px] relative p-2 rounded-full bg-black text-primary focus:outline-none"
       >
-        {darkMode ? <FaSun /> : <FaMoon />}
+        {/* {darkMode ? ( */}
+        <MdLightMode
+          className={`absolute top-1/2 -translate-x-[50%] -translate-y-[50%] text-2xl duration-300 left-1/2 ${
+            !darkMode ? "opacity-0 scale-0" : "opacity-1 scale-1"
+          }`}
+        />
+        {/* ) : ( */}
+        <MdDarkMode
+          className={`absolute top-1/2 -translate-x-[50%] -translate-y-[50%] text-2xl duration-300 left-1/2 ${
+            darkMode ? "opacity-0 scale-0" : "opacity-1 scale-1"
+          }`}
+        />
+        {/* )} */}
       </button>
     </nav>
   );

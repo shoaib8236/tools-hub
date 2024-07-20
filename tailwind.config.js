@@ -25,7 +25,9 @@ module.exports = {
         },
       },
       borderColor: {
-        primary: "#d4d4d4",
+        "light-gray": "#d4d4d4",
+        "dark-gray": "#4D4D4D",
+        "medium-gray": "#999999",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

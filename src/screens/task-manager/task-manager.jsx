@@ -1,14 +1,18 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { BiSave } from "react-icons/bi";
 import {
-  BiCheckbox,
-  BiCheckboxChecked,
-  BiCopy,
-  BiEdit,
-  BiPlus,
-  BiSave,
-  BiTrash,
-} from "react-icons/bi";
+  MdCheckBox,
+  MdCheckBoxOutlineBlank,
+  MdClose,
+  MdCopyAll,
+  MdDone,
+  MdEditNote,
+  MdOutlineDeleteForever,
+  MdPending,
+  MdPlaylistAdd,
+  MdStore,
+} from "react-icons/md";
 import { constants } from "../../utils/constants";
 
 const TaskManager = () => {
@@ -96,16 +100,32 @@ const TaskManager = () => {
     );
   };
 
-  const onCopyText = () => {
-    const sortedTasksByText = [...tasks].sort((a, b) => {
+  const onCopyText = (isDoneOnly, notDoneOnly) => {
+    let sortedTasksByText = [...tasks].sort((a, b) => {
       return a.task.localeCompare(b.task);
     });
+
+    if (isDoneOnly) {
+      sortedTasksByText = sortedTasksByText.filter((task) => task.done);
+    }
+
+    if (notDoneOnly) {
+      sortedTasksByText = sortedTasksByText.filter((task) => !task.done);
+    }
 
     const copyText = sortedTasksByText
       .map((task) => `${task.task} ${task.done ? "(Done)" : ""}`)
       .join("\n");
 
     navigator.clipboard.writeText(copyText);
+  };
+
+  const onCopyDoneOnly = () => {
+    onCopyText(true);
+  };
+
+  const onCopyNotDoneOnly = () => {
+    onCopyText(false, true);
   };
 
   const onTextareaChange = (e) => {
@@ -123,15 +143,28 @@ const TaskManager = () => {
               disabled={isTaskAdd}
               onClick={onCheckAll}
             >
-              <BiCheckboxChecked className="text-2xl" />
+              <MdCheckBox className="text-2xl" />
             </button>
-
             <button
               className={classes?.btn}
               disabled={isTaskAdd}
               onClick={onUncheckAll}
             >
-              <BiCheckbox className="text-2xl" />
+              <MdCheckBoxOutlineBlank className="text-2xl" />
+            </button>
+            <button
+              className={classes?.btn}
+              disabled={isTaskAdd}
+              onClick={onCopyNotDoneOnly}
+            >
+              <MdClose className="text-2xl" />
+            </button>
+            <button
+              className={classes?.btn}
+              disabled={isTaskAdd}
+              onClick={onCopyDoneOnly}
+            >
+              <MdDone className="text-2xl" />
             </button>
 
             <button
@@ -139,33 +172,29 @@ const TaskManager = () => {
               disabled={isTaskAdd}
               onClick={onCopyText}
             >
-              <BiCopy className="text-2xl" />
+              <MdCopyAll className="text-2xl" />
             </button>
             <button
               className={classes?.btn}
               disabled={isTaskAdd}
               onClick={onDeleteSaved}
             >
-              <BiTrash className="text-2xl" />
+              <MdOutlineDeleteForever className="text-2xl" />
             </button>
             <button
               className={classes?.btn}
               disabled={isTaskAdd}
               onClick={onSave}
             >
-              <BiSave className="text-2xl" />
+              <MdStore className="text-2xl" />
             </button>
             <button className={classes?.btn} onClick={toggleTaskAdd}>
               {tasks?.length > 0 ? (
                 <span>
-                  <BiEdit className="text-2xl" />
+                  <MdEditNote className="text-2xl" />
                 </span>
               ) : (
-                <BiPlus
-                  className={`duration-200 text-2xl ${
-                    isTaskAdd ? "rotate-45" : ""
-                  }`}
-                />
+                <MdPlaylistAdd className={`text-2xl`} />
               )}
             </button>
           </div>
@@ -178,7 +207,7 @@ const TaskManager = () => {
                   <textarea
                     value={textareaValue}
                     onChange={onTextareaChange}
-                    className="hide-scrollbar resize-none bg-gray-100 border border-primary dark:bg-dark-background-primary p-4 w-full max-w-[600px] min-h-[300px] rounded-2xl"
+                    className="hide-scrollbar resize-none bg-gray-100 border border-light-gray dark:bg-dark-background-primary p-4 w-full max-w-[600px] min-h-[300px] rounded-2xl"
                   ></textarea>
                   <button
                     onClick={onSaveTextarea}
@@ -193,7 +222,7 @@ const TaskManager = () => {
               <div>
                 {tasks.map((task, index) => (
                   <div
-                    className="flex justify-between border-t first:border-none py-4 border-primary"
+                    className="flex justify-between border-t first:border-none py-4 border-light-gray"
                     key={task?.id + index + 1}
                   >
                     <span className="font-semibold">
