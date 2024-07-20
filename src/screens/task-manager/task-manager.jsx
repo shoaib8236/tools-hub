@@ -2,7 +2,6 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { BiSave } from "react-icons/bi";
 import {
-  MdArrowRight,
   MdCheckBox,
   MdCheckBoxOutlineBlank,
   MdClose,
