@@ -131,6 +131,19 @@ const TaskManager = () => {
     setTextareaValue(e.target.value);
   };
 
+  const onCopyTitle = (title, id) => {
+    navigator.clipboard.writeText(title);
+
+    let taskNode = document.getElementById(`task-${id}`);
+    if (taskNode) {
+      taskNode.classList.add("scale-120");
+      let timer = setTimeout(() => {
+        taskNode.classList.remove("scale-120");
+        clearTimeout(timer);
+      }, 400);
+    }
+  };
+
   return (
     <div className="h-full py-screen flex flex-col overflow-hidden">
       <div className="content-wrap">
@@ -224,7 +237,11 @@ const TaskManager = () => {
                     className="flex max-sm:flex-col justify-between border-t first:border-none py-4 border-light-gray"
                     key={task?.id + index + 1}
                   >
-                    <span className="font-semibold">
+                    <span
+                      id={`task-${task?.id}`}
+                      onClick={() => onCopyTitle(task?.task, task?.id)}
+                      className="font-semibold cursor-pointer duration-300"
+                    >
                       {task?.done ? <del>{task?.task}</del> : task?.task}
                     </span>
                     <div className="flex items-center gap-4">
