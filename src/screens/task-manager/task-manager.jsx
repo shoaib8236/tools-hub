@@ -133,15 +133,6 @@ const TaskManager = () => {
 
   const onCopyTitle = (title, id) => {
     navigator.clipboard.writeText(title);
-
-    let taskNode = document.getElementById(`task-${id}`);
-    if (taskNode) {
-      taskNode.classList.add("scale-120");
-      let timer = setTimeout(() => {
-        taskNode.classList.remove("scale-120");
-        clearTimeout(timer);
-      }, 400);
-    }
   };
 
   return (
